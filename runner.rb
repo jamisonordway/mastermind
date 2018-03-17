@@ -21,6 +21,12 @@ elsif @user_guess == @solution
   You guessed #{amount_of_guesses} times."
 elsif @user_guess == "q"
   self.play
+elsif @user_guess == "c"
+  puts "The solution is #{solution}."
+elsif @user_guess.length > 4
+  puts "Your guess was too long."
+elsif @user_guess.length < 4
+  puts "Your guess was too short."
 end
 
 end
