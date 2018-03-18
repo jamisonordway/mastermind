@@ -1,35 +1,37 @@
 #require './lib/answer'
 require './lib/game'
 
+
 def play
   puts "I have generated a beginner sequence with four elements made up of: (r)ed,
-(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.
-What's your guess?"
+  (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.
+  What's your guess?"
   g = Game.new
   amount_of_guesses = 0
-  @user_guess = gets.chomp
+  guess = gets.chomp
   amount_of_guesses += 1
   g.solution_maker
-  g.check_for_correct_letters(@guess, @solution)
-  g.check_for_correct_indexes(@guess, @solution)
-if @user_guess != @solution
-  puts "You had #{@correct_letters} correct colors with #{@correct_indexes}
-  in the correct position."
-elsif @user_guess == @solution
-  "You won! You guessed #{guess}. You had #{@correct_letters} correct
-  colors in #{@correct_indexes} correct positions.
-  You guessed #{amount_of_guesses} times."
-elsif @user_guess == "q"
-  self.play
-elsif @user_guess == "c"
-  puts "The solution is #{solution}."
-elsif @user_guess.length > 4
-  puts "Your guess was too long."
-elsif @user_guess.length < 4
-  puts "Your guess was too short."
+  g.check_for_correct_letters(guess)
+  #require 'pry'; binding.pry
+  g.check_for_correct_indexes(g.guess, g.solution)
+  if guess == "q"
+    self.play
+  elsif guess == "c"
+    puts "The solution is #{g.solution_maker}"
+  elsif guess.length > 4
+    puts "Your guess was too long."
+  elsif guess.length < 4
+    puts "Your guess was too short."
+  elsif guess != g.solution
+    puts "You had #{g.correct_letters} correct colors with #{g.correct_indexes}
+    in the correct position."
+  elsif guess == g.solution
+    "You won! You guessed #{guess}. You had #{g.correct_letters} correct
+    colors in #{g.correct_indexes} correct positions.
+    You guessed #{amount_of_guesses.to_s} times."
+  end
 end
 
-end
 
 
 def show_instructions
