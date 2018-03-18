@@ -15,18 +15,17 @@ class Game
   end
 
   def game_solution
-       @solution << @colors.map do |color|
-       @color.sample
+      self.solution << @colors.map do |color|
+         @colors.sample
     end
+    #require 'pry'; binding.pry
   end
-  require 'pry'; binding.pry
   #pass in user input
   #count number of unique characters in solution, removing repeated chars
   #return any characters of guess that match
   def check_for_correct_letters(user_guess)
-    user_guess.collect do |letter|
-      @solution.include?(letter)
-      @correct_letters += 1
+    @correct_letters << user_guess.count do |g|
+      user_guess.include?(solution)
     end
   end
   #pass in user input and solution
@@ -35,10 +34,10 @@ class Game
   #count how many of these sub-arrays contain matching characters
   #return counted matches
   def check_for_correct_indexes(user_guess, game_solution)
-    @correct_indexes = @solution.zip(guess)
-    @correct_indexes.count do |char, idx|
+    zipped = @solution.zip(guess)
+    @correct_indexes = zipped.count do |char, idx|
       char == idx
     end
   end
 end
-g = Game.new
+mastermind = Game.new
