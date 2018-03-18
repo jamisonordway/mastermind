@@ -1,30 +1,32 @@
 class Game
 
-  attr_reader :correct_letters,
-  :correct_indexes,
-  :colors,
-  :solution,
-  :guess
+  attr_accessor :correct_letters,
+                :correct_indexes,
+                :colors,
+                :solution,
+                :guess
 
 
   def initialize
     @colors = ["r","g","b","y"]
     @solution = []
     @guess = []
-    @guess <<
-  end 
+    @correct_letters = 0
+  end
 
-  def solution_maker
-    @solution << @colors.map do |color|
-      @colors.sample
+  def game_solution
+       @solution << @colors.map do |color|
+       @color.sample
     end
   end
-  #pass in user input and solution
-  #count number of unique characters remove repeated chars
+  require 'pry'; binding.pry
+  #pass in user input
+  #count number of unique characters in solution, removing repeated chars
   #return any characters of guess that match
-  def check_for_correct_letters(guess)
-    @solution.uniq.map do |letter|
-      guess.to_a.include?(letter)
+  def check_for_correct_letters(user_guess)
+    user_guess.collect do |letter|
+      @solution.include?(letter)
+      @correct_letters += 1
     end
   end
   #pass in user input and solution
@@ -32,11 +34,11 @@ class Game
   #zip solution and guessed chars into arrays together
   #count how many of these sub-arrays contain matching characters
   #return counted matches
-  def check_for_correct_indexes(guess, solution)
+  def check_for_correct_indexes(user_guess, game_solution)
     @correct_indexes = @solution.zip(guess)
     @correct_indexes.count do |char, idx|
       char == idx
     end
   end
-
-  g = Game.new
+end
+g = Game.new

@@ -9,15 +9,16 @@ def play
   g = Game.new
   amount_of_guesses = 0
   guess = gets.chomp
+  user_guess = []
+  user_guess << guess.chars
   amount_of_guesses += 1
-  g.solution_maker
-  g.check_for_correct_letters(guess)
+  g.check_for_correct_letters(user_guess)
   #require 'pry'; binding.pry
   g.check_for_correct_indexes(g.guess, g.solution)
   if guess == "q"
     self.play
   elsif guess == "c"
-    puts "The solution is #{g.solution_maker}"
+    puts "The solution is #{g.game_solution}"
   elsif guess.length > 4
     puts "Your guess was too long."
   elsif guess.length < 4
@@ -49,6 +50,8 @@ loop do
   Would you like to (p)lay, get (i)nstructions, or (q)?"""
   choice = gets.chomp
   if choice == "p"
+    g = Game.new
+    g.game_solution
     play
     # execute our play sequence
     # this should be a method
