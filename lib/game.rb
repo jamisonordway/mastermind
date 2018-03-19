@@ -14,18 +14,19 @@ class Game
     @correct_letters = 0
   end
 
+#creates a random selection of colors and shovels them
+#into instance variable @solution
   def game_solution
-      self.solution << @colors.map do |color|
+      @solution << @colors.map do |color|
          @colors.sample
     end
-    #require 'pry'; binding.pry
   end
-  #pass in user input
-  #count number of unique characters in solution, removing repeated chars
-  #return any characters of guess that match
+
+  #correct_letters should increment up every time
+  #solution includes a char in user_guess
   def check_for_correct_letters(user_guess)
-    @correct_letters << user_guess.count do |g|
-      user_guess.include?(solution)
+    @correct_letters << user_guess.count do |guess_char|
+      @solution.include?(guess_char)
     end
   end
   #pass in user input and solution
@@ -33,8 +34,8 @@ class Game
   #zip solution and guessed chars into arrays together
   #count how many of these sub-arrays contain matching characters
   #return counted matches
-  def check_for_correct_indexes(user_guess, game_solution)
-    zipped = @solution.zip(guess)
+  def check_for_correct_indexes(user_guess, solution)
+    zipped = @solution.zip(user_guess)
     @correct_indexes = zipped.count do |char, idx|
       char == idx
     end

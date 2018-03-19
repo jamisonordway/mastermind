@@ -12,13 +12,16 @@ class GameTest < MiniTest::Test
     assert_instance_of Game, mastermind
   end
 
-def test_it_creates_solution
-  @colors = ["r","g","b","y"]
-  @solution =[]
-  @colors.each do |color|
-    @solution << @colors.sample
+  def test_it_creates_solution
+
   end
 
-end
+  def test_it_counts_user_guess_chars_in_solution
 
+  end
+
+  def test_it_checks_correct_indexes
+
+  end
+  
 end
