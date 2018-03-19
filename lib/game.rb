@@ -5,6 +5,7 @@ class Game
                 :colors,
                 :solution,
                 :guess
+                :amount_of_guesses
 
 
   def initialize
@@ -12,6 +13,7 @@ class Game
     @solution = []
     @guess = []
     @correct_letters = 0
+    @amount_of_guesses = 0
   end
 
 #creates a random selection of colors and shovels them
@@ -20,6 +22,11 @@ class Game
       @solution << @colors.map do |color|
          @colors.sample
     end
+  end
+
+  def add_guesses
+    #adds a guess to the guess counter
+    @amount_of_guesses += 1
   end
 
   #correct_letters should increment up every time
